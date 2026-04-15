@@ -1,0 +1,49 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class solution {
+public:
+    int fibonacci(int x) {
+        if (x == 0) {
+            return 0;
+        }
+        if (x == 1) {
+            return 1;
+        }
+
+        return fibonacci(x - 1) + fibonacci(x - 2);
+    }
+
+    void transformArray(vector<int>& arr, int n, int index) {
+        if (index == n) {
+            return;
+        }
+
+        arr[index] = fibonacci(arr[index]);
+        transformArray(arr, n, index + 1);
+    }
+
+    vector<int> getTransformedArray(vector<int>& arr, int n) {
+        transformArray(arr, n, 0);
+        return arr;
+    }
+};
+
+int main() {
+    int n;
+    cin >> n;
+
+    vector<int> arr(n);
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+
+    solution sol;
+    vector<int> result = sol.getTransformedArray(arr, n);
+
+    for (int num : result) {
+        cout << num << " ";
+    }
+
+    return 0;
+}
